@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hengyi Wang</title>
+<meta name="description" content="Hengyi Wang's homepage: research, publications and experience.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column; a narrow mono gutter carries dates, the wide track carries the text. Publications are grouped by research topic. */
+:root {
+  --bg: #f6f8f7;
+  --surface: #ffffff;
+  --fg: #17211e;
+  --muted: #5a6864;
+  --rule: #d7dfdc;
+  --accent: #17695a;
+  --accent-soft: #e2efeb;
+  --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1614; --surface: #151e1b; --fg: #e4ece9; --muted: #98a8a3;
+    --rule: #2a3632; --accent: #74d1b8; --accent-soft: #1b2e29; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1614; --surface: #151e1b; --fg: #e4ece9; --muted: #98a8a3;
+  --rule: #2a3632; --accent: #74d1b8; --accent-soft: #1b2e29; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 17px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+.wrap { max-width: 820px; margin: 0 auto; padding-block: 56px 72px; display: flex; flex-direction: column; gap: 48px; }
+a { color: var(--accent); text-decoration: none; text-underline-offset: 3px; }
+a:hover { text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+header h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.1rem, 6vw, 3rem); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 18px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 10px; padding: 0; margin: 0; list-style: none; }
+.links a { display: inline-block; font-family: var(--display); font-weight: 600; font-size: 0.88rem; padding: 5px 12px; border: 1px solid var(--rule); border-radius: 999px; background: var(--surface); }
+.links a:hover { border-color: var(--accent); text-decoration: none; }
+
+nav { display: flex; flex-wrap: wrap; gap: 4px 20px; font-family: var(--mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; border-block: 1px solid var(--rule); padding-block: 10px; }
+nav a { color: var(--muted); }
+nav a:hover { color: var(--accent); }
+
+section { display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 16px; }
+h2 { font-family: var(--display); font-weight: 600; font-size: 1.35rem; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 68ch; }
+.about { display: flex; flex-direction: column; gap: 14px; }
+
+.rows { display: flex; flex-direction: column; gap: 22px; margin: 0; padding: 0; list-style: none; }
+.row { display: grid; grid-template-columns: 148px minmax(0, 1fr); gap: 4px 20px; }
+.when { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); padding-top: 5px; font-variant-numeric: tabular-nums; }
+.what { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.org { font-family: var(--display); font-weight: 600; font-size: 1.05rem; line-height: 1.3; }
+.org span { font-weight: 500; color: var(--muted); }
+.host { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+.host b { font-weight: 500; color: var(--fg); }
+
+.eq { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+.topic { display: flex; flex-direction: column; gap: 2px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; margin-top: 10px; }
+.topic h3 { font-family: var(--display); font-weight: 600; font-size: 1.08rem; line-height: 1.3; margin: 0; color: var(--accent); text-wrap: balance; }
+.topic p { font-size: 0.93rem; color: var(--muted); }
+.pubs { display: flex; flex-direction: column; gap: 22px; margin: 0; padding: 0; list-style: none; }
+.pub { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.pub .title { font-family: var(--display); font-weight: 600; font-size: 1.02rem; line-height: 1.35; color: var(--fg); text-wrap: balance; }
+.pub .authors { font-size: 0.95rem; color: var(--muted); line-height: 1.5; }
+.pub .authors b { color: var(--fg); font-weight: 600; }
+.pub .tail { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-family: var(--mono); font-size: 0.78rem; }
+.venue { background: var(--accent-soft); color: var(--accent); padding: 2px 8px; border-radius: 4px; font-weight: 500; }
+.plain { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 6px; max-width: 68ch; }
+footer { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; }
+
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .wrap { padding-block: 36px 56px; gap: 40px; }
+  .row { grid-template-columns: minmax(0, 1fr); }
+  .when { padding-top: 0; }
+}
+</style>
+<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Hengyi Wang</h1>
+    <ul class="links">
+      <li><a href="https://scholar.google.com/citations?user=eKs-ZGQAAAAJ">Google Scholar</a></li>
+      <li><a href="https://github.com/aaronwhy">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/hengyi-wang-86605b175">LinkedIn</a></li>
+      <li><a href="https://twitter.com/HENGYIWANG24776">X</a></li>
+    </ul>
+  </header>
+
+  <nav aria-label="Sections">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#publications">Publications</a>
+    <a href="#honors">Honors</a>
+    <a href="#service">Service</a>
+    <a href="#education">Education</a>
+  </nav>
+
+  <section id="about">
+    <h2>About</h2>
+    <div class="about">
+      <p>I am a Senior Applied Scientist at Bing (Core Search &amp; AI) within Microsoft Copilot.</p>
+      <p>Before Microsoft I was an Applied Scientist at Amazon Web Services, where I worked on <a href="https://aws.amazon.com/blogs/contact-center/deliver-hyper-personalized-recommendations-with-ai-agents-in-amazon-connect/">personalized recommendations with AI agents in Amazon Connect</a>. I received my Ph.D. in Computer Science from Rutgers University in 2026, advised by <a href="http://www.wanghao.in">Hao Wang</a> (now at UIUC), and my B.S. from Peking University (Turing Honor Class).</p>
+      <p>My research covers agentic reinforcement learning and post-training, rewards and evaluation for open-ended tasks, multimodal LLMs, and concept-level interpretability of foundation models.</p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <ul class="rows">
+      <li class="row">
+        <div class="when">May 2026 – Present</div>
+        <div class="what">
+          <div class="org">Microsoft <span>· Senior Applied Scientist</span></div>
+          <p>Bing (Core Search &amp; AI) within Copilot.</p>
+        </div>
+      </li>
+      <li class="row">
+        <div class="when">Oct 2025 – May 2026</div>
+        <div class="what">
+          <div class="org">Amazon Web Services <span>· Applied Scientist II, Generative AI</span></div>
+          <p>Trajectory data engine and post-training for agentic, personalized recommendations.</p>
+          <p>Products: <a href="https://aws.amazon.com/blogs/contact-center/deliver-hyper-personalized-recommendations-with-ai-agents-in-amazon-connect/">AI-agent personalized recommendations in Amazon Connect</a> (featured at re:Invent 2025); <a href="https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles-predictive-insights.html">Predictive Insights</a> and the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles-web-tracker-and-notification.html">web data tracker and web notification</a> for Amazon Connect Customer Profiles (preview).</p>
+        </div>
+      </li>
+      <li class="row">
+        <div class="when">Sep 2024 – Apr 2025</div>
+        <div class="what">
+          <div class="org">Microsoft Research <span>· Research Collaborator</span></div>
+          <div class="host">Host: <b><a href="https://www.microsoft.com/en-us/research/people/akshayn/">Akshay Nambi</a></b></div>
+          <p>Long-context multimodal retrieval and grounding; led <a href="https://aclanthology.org/2025.naacl-long.166">MMNeedle</a> (NAACL 2025 Oral).</p>
+        </div>
+      </li>
+      <li class="row">
+        <div class="when">May 2025 – Aug 2025</div>
+        <div class="what">
+          <div class="org">Amazon Web Services <span>· Applied Scientist Intern</span></div>
+          <div class="host">Host: <b><a href="https://www.mit.edu/~ywang02/">Bernie Wang</a></b></div>
+        </div>
+      </li>
+      <li class="row">
+        <div class="when">May 2024 – Aug 2024</div>
+        <div class="what">
+          <div class="org">Amazon Web Services <span>· Applied Scientist Intern</span></div>
+          <div class="host">Host: <b><a href="https://bkveton.com">Branislav Kveton</a></b></div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+    <p class="eq">* equal contribution</p>
+
+    <div class="topic">
+      <h3>Training data, model adaptation and personalization</h3>
+      <p>Data curation and efficient adaptation for retrieval, recommendation and language models.</p>
+    </div>
+    <ul class="pubs">
+      <li class="pub">
+        <a class="title" href="https://arxiv.org/abs/2603.17205">OPERA: Online Data Pruning for Efficient Retrieval Model Adaptation</a>
+        <div class="authors">Haoyang Fang, Shuai Zhang, Yifei Ma, <b>Hengyi Wang</b>, Cuixiong Hu, Katrin Kirchhoff, Bernie Wang, George Karypis</div>
+        <div class="tail"><span class="venue">COLM 2026</span><a href="https://arxiv.org/abs/2603.17205">Paper</a></div>
+      </li>
+      <li class="pub">
+        <a class="title" href="https://doi.org/10.1145/3773078.3831754">Probabilistic Residual Learning for Online Recommendations</a>
+        <div class="authors">Wenyuan Wang*, Yusong Zhao*, Zihao Xu*, <b>Hengyi Wang</b>*, Qi Xu*, Zhigang Hua*, Yan Xie, Yi Wang, Zihao Zhao, Bo Long, Chengzhi Mao, Shuang Yang, Hengguan Huang, Hao Wang</div>
+        <div class="tail"><span class="venue">RecSys 2026</span><a href="https://doi.org/10.1145/3773078.3831754">Paper</a><a href="https://arxiv.org/abs/2607.20863">arXiv</a></div>
+      </li>
+      <li class="pub">
+        <a class="title" href="https://dl.acm.org/doi/10.1145/3735633">Continual Learning of Large Language Models: A Comprehensive Survey</a>
+        <div class="authors">Haizhou Shi, Zihao Xu, <b>Hengyi Wang</b>, Weiyi Qin, Wenyuan Wang, Yibin Wang, Zifeng Wang, Sayna Ebrahimi, Hao Wang</div>
+        <div class="tail"><span class="venue">ACM Computing Surveys 2025</span><a href="https://dl.acm.org/doi/10.1145/3735633">Paper</a><a href="https://arxiv.org/abs/2404.16789">arXiv</a><a href="https://github.com/Wang-ML-Lab/llm-continual-learning-survey">Code</a></div>
+      </li>
+    </ul>
+
+    <div class="topic">
+      <h3>Evaluation and reliability of LLMs</h3>
+      <p>Benchmarks, uncertainty estimation and decoding methods that expose and reduce model failures.</p>
+    </div>
+    <ul class="pubs">
+      <li class="pub">
+        <a class="title" href="https://aclanthology.org/2025.naacl-long.166">Multimodal Needle in a Haystack: Benchmarking Long-Context Capability of Multimodal Large Language Models</a>
+        <div class="authors"><b>Hengyi Wang</b>, Haizhou Shi, Shiwei Tan, Weiyi Qin, Wenyuan Wang, Tunyu Zhang, Akshay Nambi, Tanuja Ganu, Hao Wang</div>
+        <div class="tail"><span class="venue">NAACL 2025 · Oral</span><a href="https://aclanthology.org/2025.naacl-long.166">Paper</a><a href="https://arxiv.org/abs/2406.11230">arXiv</a><a href="https://mmneedle.github.io">Project</a><a href="https://github.com/Wang-ML-Lab/multimodal-needle-in-a-haystack">Code</a></div>
+      </li>
+      <li class="pub">
+        <a class="title" href="https://openreview.net/forum?id=VHQc7wzmYv">TokUR: Token-Level Uncertainty Estimation for Large Language Model Reasoning</a>
+        <div class="authors">Tunyu Zhang*, Haizhou Shi*, Yibin Wang, <b>Hengyi Wang</b>, Xiaoxiao He, Zhuowei Li, Haoxian Chen, Ligong Han, Kai Xu, Huan Zhang, Dimitris Metaxas, Hao Wang</div>
+        <div class="tail"><span class="venue">ICLR 2026</span><a href="https://openreview.net/forum?id=VHQc7wzmYv">Paper</a><a href="https://arxiv.org/abs/2505.11737">arXiv</a></div>
+      </li>
+      <li class="pub">
+        <a class="title" href="https://openreview.net/forum?id=5Wb5c0FaCG">Causal Decoding for Hallucination-Resistant Multimodal Large Language Models</a>
+        <div class="authors">Shiwei Tan*, <b>Hengyi Wang</b>*, Weiyi Qin*, Qi Xu*, Zhigang Hua*, Hao Wang</div>
+        <div class="tail"><span class="venue">TMLR 2026</span><a href="https://openreview.net/forum?id=5Wb5c0FaCG">Paper</a><a href="https://arxiv.org/abs/2602.21441">arXiv</a></div>
+      </li>
+    </ul>
+
+    <div class="topic">
+      <h3>Understanding and steering foundation models</h3>
+      <p>Concept-level explanations of what vision and language models learn, and how to steer them.</p>
+    </div>
+    <ul class="pubs">
+      <li class="pub">
+        <a class="title" href="https://arxiv.org/abs/2606.16193">SAE++: Cascaded Sparse Autoencoders Learn Multi-Level Visual Concepts in Multimodal LLMs</a>
+        <div class="authors">Yusong Zhao*, <b>Hengyi Wang</b>*, Tanuja Ganu, Akshay Nambi, Hao Wang</div>
+        <div class="tail"><span class="venue">NeurIPS 2026</span><a href="https://arxiv.org/abs/2606.16193">Paper</a><a href="https://github.com/Wang-ML-Lab/sae-plus-plus">Code</a></div>
+      </li>
+      <li class="pub">
+        <a class="title" href="https://proceedings.mlr.press/v235/wang24bo.html">Probabilistic Conceptual Explainers: Trustworthy Conceptual Explanations for Vision Foundation Models</a>
+        <div class="authors"><b>Hengyi Wang</b>*, Shiwei Tan*, Hao Wang</div>
+        <div class="tail"><span class="venue">ICML 2024</span><a href="https://proceedings.mlr.press/v235/wang24bo.html">Paper</a><a href="https://arxiv.org/abs/2406.12649">arXiv</a><a href="https://github.com/Wang-ML-Lab/interpretable-foundation-models">Code</a></div>
+      </li>
+      <li class="pub">
+        <a class="title" href="https://aclanthology.org/2024.findings-emnlp.505">Variational Language Concepts for Interpreting Foundation Language Models</a>
+        <div class="authors"><b>Hengyi Wang</b>, Shiwei Tan, Zhiqing Hong, Desheng Zhang, Hao Wang</div>
+        <div class="tail"><span class="venue">Findings of EMNLP 2024</span><a href="https://aclanthology.org/2024.findings-emnlp.505">Paper</a><a href="https://arxiv.org/abs/2410.03964">arXiv</a></div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="honors">
+    <h2>Honors &amp; Awards</h2>
+    <ul class="plain">
+      <li>Silver Medal, Chinese Mathematics Olympiad, 2015</li>
+      <li>Oral presentation, NAACL 2025 (MMNeedle)</li>
+    </ul>
+  </section>
+
+  <section id="service">
+    <h2>Service</h2>
+    <ul class="plain">
+      <li>Area Chair: CVPR 2027</li>
+      <li>Reviewer: ICML, NeurIPS, CVPR, ICCV, ECCV, ACL Rolling Review</li>
+    </ul>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <ul class="rows">
+      <li class="row">
+        <div class="when">2026</div>
+        <div class="what">
+          <div class="org">Rutgers University <span>· Ph.D. in Computer Science</span></div>
+          <div class="host">Advisor: <b><a href="http://www.wanghao.in">Hao Wang</a></b> (now at UIUC)</div>
+          <p>Dissertation: <em>Conceptual Explanations for Vision and Language Foundation Models</em></p>
+        </div>
+      </li>
+      <li class="row">
+        <div class="when">2021</div>
+        <div class="what">
+          <div class="org">Peking University <span>· B.S. in Computer Science</span></div>
+          <div class="host">Turing Honor Class</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <footer>Last updated November 2026</footer>
+</div>
+</body>
+</html>
